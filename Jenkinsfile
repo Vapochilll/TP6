@@ -4,7 +4,6 @@ pipeline {
    environment {
     IMAGE_NAME = 'vapochilll/my-python-project'
     DOCKER_USER = 'vapochilll'
-    DOCKER_SECRET = credentials(' docker-hub-secret-ricardo')
    } 
     stages {
         stage('Checkout Code') {
@@ -54,16 +53,13 @@ pipeline {
         stage('Docker Image') {
             steps {
                 script {
-                    //withCredentials([string(credentialsId: 'DOCKER_PASSWORD_RICARDO', variable: 'DOCKER_PASS')]) {
-                    //    sh """
-                    //        docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
-                    //        echo $DOCKER_PASS|docker login -u $DOCKER_USER --password-stdin
-                    //        docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
-                    //    """
-                    //}
-                         sh  'docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .'
-                         sh  'echo $DOCKER_SECRET|docker login -u $DOCKER_USER --password-stdin'
-                         sh  'docker push ${IMAGE_NAME}:${env.BUILD_VERSION}'
+                    withCredentials([string(credentialsId: 'DOCKER_PASSWORD_RICARDO', variable: 'DOCKER_PASS')]) {
+                        sh """
+                            docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
+                            echo $DOCKER_PASS|docker login -u $DOCKER_USER --password-stdin
+                            docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
+                        """
+                    }
                 }
             }
         }
