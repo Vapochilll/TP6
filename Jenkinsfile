@@ -3,7 +3,7 @@ pipeline {
 
    environment { 
     IMAGE_NAME = 'vapochilll/my-python-project'
-    DOCKER_USER = 'DOCKER_LOGIN'
+    DOCKER_USER = 'vapochilll'
    } 
     stages {
         stage('Checkout Code') {
@@ -43,7 +43,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'DOCKER_PASSWORD_RICARDO', variable: 'DOCKER_PASS')]) {
                         sh """
                             docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
-                            docker login -u $DOCKER_LOGIN -p $DOCKER_PASS
+                            docker login -u $DOCKER_USER -p $DOCKER_PASS
                             docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
                         """
                     }
