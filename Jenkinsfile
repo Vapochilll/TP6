@@ -41,6 +41,12 @@ pipeline {
                             sh 'pytest | tee report.txt'
                         }
                     }
+                    post {
+                        always {
+                            // rendre accessible le rapport
+                            archiveArtifacts artifacts: 'report.txt', fingerprint: true
+                        }
+                    }
                 }
             }
         }
