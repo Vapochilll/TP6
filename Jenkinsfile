@@ -2,13 +2,13 @@ pipeline {
     agent any
 
    environment { 
-    IMAGE_NAME = 'vapochill/my-python-project'
+    IMAGE_NAME = 'vapochilll/my-python-project'
     DOCKER_USER = 'DOCKER_LOGIN'
    } 
     stages {
         stage('Checkout Code') {
            steps {
-               git 'https://github.com/Vapochilll/my-python-project.git'
+               git clone 'https://github.com/Vapochilll/my-python-project.git:main'
            }
         }
         stage('Flake & Tests') {
