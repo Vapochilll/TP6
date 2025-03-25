@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+   agent any
 
    environment {
     IMAGE_NAME = 'vapochilll/my-python-project'
@@ -16,11 +16,11 @@ pipeline {
         }
         stage('Version & Flake & Tests') {
             parallel {
-               stage('Build') { 
+               stage('Init version') { 
                     steps { 
                          script {
-                           def buildVersion = "1.0.${env.BUILD_NUMBER}"
-                           echo "Building ${IMAGE_NAME} version ${buildVersion}"
+                           env.BUILD_VERSION = "1.0.${env.BUILD_NUMBER}"
+                           echo "Building ${IMAGE_NAME} version ${env.BUILD_VERSION}"
                          }
                     } 
                 } 
@@ -34,7 +34,6 @@ pipeline {
                         }
                     }
                 }
-
                 stage('Tests') {
                     steps {
                         script {
