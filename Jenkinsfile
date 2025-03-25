@@ -13,7 +13,6 @@ pipeline {
                         git branch: 'main', url: 'https://github.com/Vapochilll/my-python-project.git'
                     }
             }
-           }
         }
         stage('Flake & Tests') {
             parallel {
