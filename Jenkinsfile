@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-   environment { 
+   environment {
     IMAGE_NAME = 'vapochilll/my-python-project'
     DOCKER_USER = 'vapochilll'
    } 
@@ -14,8 +14,16 @@ pipeline {
                     }
             }
         }
-        stage('Flake & Tests') {
+        stage('Version & Flake & Tests') {
             parallel {
+               stage('Build') { 
+                    steps { 
+                         script {
+                           def buildVersion = "1.0.${env.BUILD_NUMBER}"
+                           echo "Building ${IMAGE_NAME} version ${buildVersion}"
+                         }
+                    } 
+                } 
                 stage('Flake') {
                     steps {
                         script {
