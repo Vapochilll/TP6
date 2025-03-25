@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
            steps {
-               checkout 'https://github.com/Vapochilll/my-python-project.git:main'
+               git 'https://github.com/Vapochilll/my-python-project.git'
            }
         }
         stage('Flake & Tests') {
