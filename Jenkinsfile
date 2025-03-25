@@ -59,4 +59,12 @@ pipeline {
         }
 
     }
+    post {
+        success {
+            echo "Pipeline terminé!"
+        }
+        failure {
+            echo "Pipeline échoué."
+        }
+    }
 }
