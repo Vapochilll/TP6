@@ -43,7 +43,7 @@ pipeline {
                     }
                     post {
                         always {
-                            // rendre accessible le rapport
+                            // Rendre accessible le rapport
                             archiveArtifacts artifacts: 'report.txt', fingerprint: true
                         }
                     }
