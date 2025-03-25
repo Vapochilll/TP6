@@ -7,8 +7,12 @@ pipeline {
    } 
     stages {
         stage('Checkout Code') {
-           steps {
-               git 'https://github.com/Vapochilll/my-python-project.git'
+            steps {
+                 script {
+                        // Checkout from a specific Git repository and branch
+                        git branch: 'main', url: 'https://github.com/Vapochilll/my-python-project.git'
+                    }
+            }
            }
         }
         stage('Flake & Tests') {
