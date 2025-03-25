@@ -56,7 +56,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'DOCKER_PASSWORD_RICARDO', variable: 'DOCKER_PASS')]) {
                         sh """
                             docker build -t ${IMAGE_NAME}:${env.BUILD_VERSION} .
-                            echo $DOCKER_PASS|docker login -u $DOCKER_USER --password-stdin
+                            echo --key $DOCKER_PASS|docker login -u $DOCKER_USER --password-stdin
                             docker push ${IMAGE_NAME}:${env.BUILD_VERSION}
                         """
                     }
